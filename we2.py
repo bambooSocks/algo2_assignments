@@ -10,10 +10,10 @@ def dist(x, i, j):
         return 1
     else:
         output = [0]
-        for l in reversed(range(i)):
+        for l in reversed(range(i+1)):
+            if D[l, i] == 0:
+                D[l, i] = dist(x, l, i)
             if x[i] - x[l] < x[j] - x[i]:
-                if D[l, i] == 0:
-                    D[l, i] = dist(x, l, i)
                 output.append(D[l, i])
         return max(output) + 1
 
@@ -21,7 +21,7 @@ def dist(x, i, j):
 def findMaxScore(x):
     output = [0]
     i = len(x) - 1
-    for l in reversed(range(i)):
+    for l in reversed(range(i+1)):
         if D[l, i] == 0:
             D[l, i] = dist(x, l, i)
         output.append(D[l, i])

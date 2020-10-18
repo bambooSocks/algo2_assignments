@@ -71,17 +71,17 @@ class Graph:
   
         return [max_flow, parent] 
 # Read inputs
-# raw = input()
-# given_n_m = list(map(int, raw.split(' ')))
-# n = given_n_m[0]
-# m = given_n_m[1]
-# graph = []
+raw = input()
+given_n_m = list(map(int, raw.split(' ')))
+n = given_n_m[0]
+m = given_n_m[1]
+graph = []
 
 # Sample data
-n = 4
-m = 8
-graph = []
-rows = [[1, 0], [5, 1, 2, 4, 5, 7], [5, 1, 2, 4, 5, 7], [3, 1, 3, 6]]
+# n = 4
+# m = 8
+# graph = []
+# rows = [[1, 0], [5, 1, 2, 4, 5, 7], [5, 1, 2, 4, 5, 7], [3, 1, 3, 6]]
 
 # Build graph
 # First row elements from index 1 unitl n+1 are 2 else 0
@@ -93,9 +93,9 @@ graph.append(fRow)
 # Build the next n rows 
 firstNelements = [0]*(n+1)
 for i in range(n):
-    # raw = input()
-    # given_row = list(map(int, raw.split(' ')))
-    given_row = rows[i]
+    raw = input()
+    given_row = list(map(int, raw.split(' ')))
+    # given_row = rows[i]
     mElements = [1]*(m)
     if given_row[0] > 0:
         for y in range(1, len(given_row)):

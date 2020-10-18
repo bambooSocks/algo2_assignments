@@ -70,47 +70,54 @@ class Graph:
                 v = parent[v] 
   
         return max_flow 
+# Read inputs
 raw = input()
 given_n_m = list(map(int, raw.split(' ')))
 n = given_n_m[0]
 m = given_n_m[1]
 graph = []
-    
+
+# Sample data
 # n = 4
 # m = 8
 # graph = []
 # rows = [[1, 0], [5, 1, 2, 4, 5, 7], [5, 1, 2, 4, 5, 7], [3, 1, 3, 6]]
-fRow = []
-for i in range(n+m+2):
-    if i > 0 and i<n+1:
-        fRow.append(2)
-    else:
-        fRow.append(0) 
+
+# Build graph
+# First row elements from index 1 unitl n+1 are 2 else 0
+fRow = [0]*(n+m+2) 
+for i in range(1, n+1):
+    fRow[i] = 2
 graph.append(fRow)
 
+# Build the next n rows 
+firstNelements = [0]*(n+1)
 for i in range(n):
+    # given_row = rows[i]
     raw_row = input()
     given_row = list(map(int, raw_row.split(' ')))
-    tRow = []
-    for x in range(n+m+2):
-        if x > n and x < n+m+1:
-            tRow.append(1)
-        else:
-            tRow.append(0)
-    if len(given_row) > 0:
+    mElements = [1]*(m)
+    if given_row[0] > 0:
         for y in range(1, len(given_row)):
-            treeIndex = given_row[y] + n + 1
-            tRow[treeIndex] = 0
-        graph.append(tRow)
+            treeIndex = given_row[y]
+            mElements[treeIndex] = 0
+    row = firstNelements + mElements
+    row.append(0)
+    graph.append(row)
 
+# Build the next m rows with n+m+1 0 and the last element 1
+for i in range(m):
+    tRow = [0]*(n+m+1)
+    mRow = tRow + [1]
+    graph.append(mRow)
 
-for i in range(n+1, n+m+2):
-    tRow = []
-    for x in range(n+m+1):
-        tRow.append(0)
-    tRow.append(1)
-    graph.append(tRow)
+# The last row is the sink with all elements as 0
+lastRow = [0]*(n+m+2)
+graph.append(lastRow)
+
+# Main method
 g = Graph(graph) 
 source = 0
 sink = n+m+1
+print(graph)
 print (g.FordFulkerson(source, sink)) 
